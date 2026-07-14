@@ -1,0 +1,28 @@
+grid = [
+    [0, 0, 0],
+    [0,-1, 0], 
+    [0, 0, 5]   
+]
+
+n = 3
+V = [[0]*n for _ in range(n)]
+g = 0.9
+
+for _ in range(20):      
+    for i in range(n):
+        for j in range(n):
+            r = V[i][j+1] if j<n-1 else -999
+            d = V[i+1][j] if i<n-1 else -999
+            V[i][j] = grid[i][j] + g*max(r,d)
+
+print("Value Function:")
+for row in V:
+    print(row)
+
+print("\nOptimal Policy:")
+for i in range(n):
+    for j in range(n):
+        r = V[i][j+1] if j<n-1 else -999
+        d = V[i+1][j] if i<n-1 else -999
+        print("R" if r>d else "D", end=" ")
+    print()
